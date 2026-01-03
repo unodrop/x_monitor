@@ -1,0 +1,53 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Background -->
+  <rect width="512" height="512" rx="120" fill="#0F172A"/>
+  
+  <!-- Glow Effect Background -->
+  <circle cx="256" cy="256" r="220" fill="url(#glowGradient)" opacity="0.3"/>
+  
+  <!-- X Letter with Neon Effect -->
+  <g filter="url(#glow)">
+    <path d="M180 180L256 256L332 180M332 332L256 256L180 332" 
+          stroke="url(#goldGradient)" 
+          stroke-width="48" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Blockchain Chain Links (Decorative) -->
+  <circle cx="140" cy="140" r="16" fill="url(#goldGradient)" opacity="0.6"/>
+  <circle cx="372" cy="140" r="16" fill="url(#goldGradient)" opacity="0.6"/>
+  <circle cx="140" cy="372" r="16" fill="url(#goldGradient)" opacity="0.6"/>
+  <circle cx="372" cy="372" r="16" fill="url(#goldGradient)" opacity="0.6"/>
+  
+  <!-- Connecting Lines (Blockchain style) -->
+  <path d="M140 140L180 180" stroke="url(#goldGradient)" stroke-width="3" opacity="0.4" stroke-dasharray="4 4"/>
+  <path d="M372 140L332 180" stroke="url(#goldGradient)" stroke-width="3" opacity="0.4" stroke-dasharray="4 4"/>
+  <path d="M140 372L180 332" stroke="url(#goldGradient)" stroke-width="3" opacity="0.4" stroke-dasharray="4 4"/>
+  <path d="M372 372L332 332" stroke="url(#goldGradient)" stroke-width="3" opacity="0.4" stroke-dasharray="4 4"/>
+  
+  <!-- Gradient Definitions -->
+  <defs>
+    <!-- Gold Gradient for X -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow Gradient -->
+    <radialGradient id="glowGradient" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
