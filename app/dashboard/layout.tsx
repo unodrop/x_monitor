@@ -1,9 +1,10 @@
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { LogOut, Home } from "lucide-react";
 import { logout } from "@/app/actions/logout";
 import { NavLink } from "@/components/nav-link";
 import { ToastProvider } from "@/components/toast-provider";
+import Link from "next/link";
 
 export default async function DashboardLayout({
   children,
@@ -38,6 +39,13 @@ export default async function DashboardLayout({
           </div>
 
           <nav className="flex-1 space-y-2 px-3">
+            <Link
+              href="/"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-black transition-all duration-200 hover:bg-black/5 hover:shadow-sm dark:text-white dark:hover:bg-white/5 cursor-pointer"
+            >
+              <Home className="h-4 w-4" />
+              <span>首页</span>
+            </Link>
             <NavLink href="/dashboard">KOL 管理</NavLink>
             <NavLink href="/dashboard/notifications">通知分组</NavLink>
           </nav>

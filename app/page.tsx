@@ -1,12 +1,5 @@
-import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/auth";
+import { ToolsHomePage } from "@/components/tools-home-page";
 
-export default async function Home() {
-  const user = await getCurrentUser();
-
-  if (user) {
-    redirect("/dashboard");
-  } else {
-    redirect("/login");
-  }
+export default function Home() {
+  return <ToolsHomePage />;
 }
