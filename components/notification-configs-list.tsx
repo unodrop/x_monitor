@@ -27,6 +27,34 @@ const channelTypeLabels: Record<string, string> = {
   webhook: "自定义Webhook",
 };
 
+const channelTypeColors: Record<string, { bg: string; text: string; border: string }> = {
+  telegram: {
+    bg: "bg-blue-100 dark:bg-blue-950/40",
+    text: "text-blue-700 dark:text-blue-300",
+    border: "border-blue-200 dark:border-blue-800/50",
+  },
+  discord: {
+    bg: "bg-indigo-100 dark:bg-indigo-950/40",
+    text: "text-indigo-700 dark:text-indigo-300",
+    border: "border-indigo-200 dark:border-indigo-800/50",
+  },
+  dingtalk: {
+    bg: "bg-blue-100 dark:bg-blue-950/40",
+    text: "text-blue-700 dark:text-blue-300",
+    border: "border-blue-200 dark:border-blue-800/50",
+  },
+  feishu: {
+    bg: "bg-green-100 dark:bg-green-950/40",
+    text: "text-green-700 dark:text-green-300",
+    border: "border-green-200 dark:border-green-800/50",
+  },
+  webhook: {
+    bg: "bg-amber-100 dark:bg-amber-950/40",
+    text: "text-amber-700 dark:text-amber-300",
+    border: "border-amber-200 dark:border-amber-800/50",
+  },
+};
+
 export function NotificationConfigsList({
   initialConfigs,
 }: NotificationConfigsListProps) {
@@ -81,7 +109,15 @@ export function NotificationConfigsList({
                 <h3 className="text-sm font-bold text-black dark:text-white truncate">
                   {config.name}
                 </h3>
-                <span className="inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-semibold bg-black text-white dark:bg-white dark:text-black shrink-0">
+                <span
+                  className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[10px] font-semibold shrink-0 ${
+                    channelTypeColors[config.channel_type]?.bg || "bg-gray-100 dark:bg-gray-800"
+                  } ${
+                    channelTypeColors[config.channel_type]?.text || "text-gray-700 dark:text-gray-300"
+                  } ${
+                    channelTypeColors[config.channel_type]?.border || "border-gray-200 dark:border-gray-700"
+                  }`}
+                >
                   {channelTypeLabels[config.channel_type] || config.channel_type}
                 </span>
               </div>
