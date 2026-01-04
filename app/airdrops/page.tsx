@@ -313,15 +313,8 @@ export default function AirdropsPage() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/">
-                <Button variant="outline" size="sm" className="cursor-pointer  border-0">
-                  回到首页
-                </Button>
-              </Link>
-              <Link href="/dashboard">
-                <Button variant="outline" size="sm" className="cursor-pointer border-0">
-                  Dashboard
-                </Button>
+              <Link href="/" className="cursor-pointer">
+                回到首页
               </Link>
             </div>
           </div>

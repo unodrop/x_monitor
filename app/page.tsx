@@ -1379,15 +1379,8 @@ export default function Home() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/airdrops">
-                <Button variant="outline" size="sm" className="cursor-pointer border-0">
-                  空投项目
-                </Button>
-              </Link>
-              <Link href="/dashboard">
-                <Button variant="outline" size="sm" className="cursor-pointer border-0">
-                  Dashboard
-                </Button>
+              <Link href="/airdrops" className="cursor-pointer">
+                空投项目
               </Link>
             </div>
           </div>
