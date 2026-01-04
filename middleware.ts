@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { verifyToken } from "@/lib/jwt";
 
 // Routes that don't require authentication
-const publicRoutes = ["/", "/login"];
+const publicRoutes = ["/", "/login", "/airdrops"];
 
 // Public API routes that don't require authentication
 const publicApiRoutes = ["/api/cron", "/api/inngest"];
