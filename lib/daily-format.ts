@@ -81,8 +81,7 @@ export function formatDailyDataForTelegram(
     const changeStr = formatChange(indicator.change);
 
     message += `<b>${indicator.name}</b>\n`;
-    message += `数值: <code>${valueStr}${unitStr}</code> ${changeStr}\n`;
-    message += `<i>${indicator.description}</i>\n\n`;
+    message += `<code>${valueStr}${unitStr}</code> ${changeStr}\n\n`;
   }
 
   message += `━━━━━━━━━━━━━━━━\n`;
