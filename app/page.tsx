@@ -9,7 +9,6 @@ import {
   Wallet,
   TrendingUp,
   Globe,
-  ArrowRight,
   BarChart3,
   Dog,
   Building2,
@@ -20,8 +19,8 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
+import { SiteHeader } from "@/components/site-header";
 
 interface Tool {
   id: string;
@@ -1191,7 +1190,7 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-blue-950/20 dark:to-indigo-950/30 relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-blue-950/20 dark:to-indigo-950/30 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.05),transparent_50%)]" />
@@ -1199,8 +1198,13 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl dark:bg-indigo-900/10" />
       </div>
 
+      {/* Header */}
+      <SiteHeader />
+
+      {/* Main Content - flex-1 to push footer to bottom */}
+      <div className="flex-1">
       {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-6 pt-20 pb-16 relative z-10">
+      <section className="mx-auto max-w-7xl px-6 pt-12 pb-16 relative z-10">
         <div className="text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/90 backdrop-blur-sm px-4 py-2 text-sm font-medium text-black shadow-sm dark:border-white/10 dark:bg-gray-900/70 dark:text-white">
             <Sparkles className="h-4 w-4 text-amber-500" />
@@ -1363,26 +1367,15 @@ export default function Home() {
           </div>
         )}
       </section>
+      </div>
 
       {/* Footer */}
-      <footer className="border-t border-black/10 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/60 relative z-10">
+      <footer className="border-t border-black/10 dark:border-white/10 backdrop-blur-sm mt-auto">
         <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-black to-gray-900 dark:from-white dark:to-gray-100">
-                <span className="text-sm font-bold text-white dark:text-black">
-                  X
-                </span>
-              </div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                © 2026 Airdrop.uno 区块链工具导航平台.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/airdrops" className="cursor-pointer">
-                空投项目
-              </Link>
-            </div>
+          <div className="flex items-center justify-center">
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              © 2026 Airdrop.uno 区块链工具导航平台.
+            </p>
           </div>
         </div>
       </footer>

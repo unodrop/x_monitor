@@ -7,9 +7,8 @@ import {
   CreditCard,
   Bot,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { SiteHeader } from "@/components/site-header";
 
 interface AirdropProject {
   id: string;
@@ -185,29 +184,20 @@ const airdropProjects: AirdropProject[] = [
 
 export default function AirdropsPage() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-blue-950/20 dark:to-indigo-950/30">
+    <div className="flex flex-col min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-blue-950/20 dark:to-indigo-950/30">
       {/* Background decorative elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-blue-400/20 blur-3xl dark:bg-blue-600/10" />
         <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-indigo-400/20 blur-3xl dark:bg-indigo-600/10" />
       </div>
 
-      {/* Content */}
-      <main className="relative z-10 pt-16 pb-16">
+      {/* Header */}
+      <SiteHeader />
+
+      {/* Main Content - flex-1 to push footer to bottom */}
+      <main className="flex-1 relative z-10 pt-8 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           {/* Page Header Section */}
-          <div className="mb-12">
-
-            {/* Title and Description */}
-            <div className="text-center">
-              <h1 className="mb-4 text-4xl font-bold tracking-tight text-black dark:text-white sm:text-5xl">
-                优质空投项目
-              </h1>
-              <p className="mx-auto max-w-2xl text-lg font-medium text-gray-600 dark:text-gray-400">
-                精选优质区块链空投项目，按分类整理，助您把握早期机会
-              </p>
-            </div>
-          </div>
           {categories.map((category) => {
             const categoryProjects = airdropProjects.filter(
               (project) => project.category === category.id
@@ -299,24 +289,12 @@ export default function AirdropsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-black/10 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/60 relative z-10">
+      <footer className="border-t border-black/10 dark:border-white/10 backdrop-blur-sm mt-auto">
         <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-black to-gray-900 dark:from-white dark:to-gray-100">
-                <span className="text-sm font-bold text-white dark:text-black">
-                  X
-                </span>
-              </div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                © 2026 Airdrop.uno 区块链工具导航平台.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/" className="cursor-pointer">
-                回到首页
-              </Link>
-            </div>
+          <div className="flex items-center justify-center">
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              © 2026 Airdrop.uno 区块链工具导航平台.
+            </p>
           </div>
         </div>
       </footer>
