@@ -1,6 +1,6 @@
 import { serve } from "inngest/next";
 import { inngest } from "@/lib/inngest";
-import { checkTweetsFunction, dailyNewsFunction } from "@/inngest/functions";
+import { checkTweetsFunction, dailyNewsFunction, dailyMetricsFunction } from "@/inngest/functions";
 
 /**
  * Inngest API 路由
@@ -14,6 +14,7 @@ export const { GET, POST, PUT } = serve({
   functions: [
     checkTweetsFunction,
     dailyNewsFunction,
+    dailyMetricsFunction,
   ],
 });
 

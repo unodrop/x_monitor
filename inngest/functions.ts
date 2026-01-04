@@ -3,6 +3,8 @@ import { supabaseAdmin } from "@/db";
 import { checkAndSendTweetsForTarget } from "@/lib/monitor-utils";
 import { parseRSS, formatRSSItemsForTelegram } from "@/lib/rss";
 import { sendTelegramHTMLMessage } from "@/lib/telegram";
+import { formatDailyDataForTelegram } from "@/lib/daily-format";
+import { getDailyMetrics } from "@/lib/daily-metrics";
 
 /**
  * KOL 推文监控定时任务
@@ -172,6 +174,73 @@ export const dailyNewsFunction = inngest.createFunction(
         };
       } catch (error) {
         console.error("Cron job error:", error);
+        throw error;
+      }
+    });
+  }
+);
+
+/**
+ * 每日加密日报推送定时任务
+ * 每天早上 10:00 (UTC+8) = 02:00 UTC 执行
+ */
+export const dailyMetricsFunction = inngest.createFunction(
+  {
+    id: "daily-metrics",
+    name: "Daily Crypto Metrics Push",
+    retries: 2,
+  },
+  {
+    cron: "0 2 * * *", // 每天 02:00 UTC (对应 UTC+8 的 10:00)
+  },
+  async ({ step }) => {
+    return await step.run("send-daily-metrics", async () => {
+      try {
+        // 检查环境变量
+        const botToken = process.env.X_MONITOR_BOT_TOKEN;
+        const chatId = process.env.X_MONITOR_CHAT_ID;
+        const topicId = process.env.X_MONITOR_TOPIC_ID
+          ? Number(process.env.X_MONITOR_TOPIC_ID)
+          : undefined;
+
+        if (!botToken || !chatId) {
+          throw new Error(
+            "X_MONITOR_BOT_TOKEN and X_MONITOR_CHAT_ID are required"
+          );
+        }
+
+        // 获取日报数据
+        const data = await getDailyMetrics();
+
+        // 格式化日报数据为 Telegram 消息
+        const message = formatDailyDataForTelegram(
+          data.cryptoPrices,
+          data.marketIndicators
+        );
+
+        // 发送到指定的 Telegram 群组/话题
+        const result = await sendTelegramHTMLMessage(
+          {
+            botToken,
+            chatId,
+            topicId,
+          },
+          message
+        );
+
+        if (!result.success) {
+          throw new Error(result.error || "Failed to send message");
+        }
+
+        return {
+          success: true,
+          message: "Daily metrics sent successfully",
+          messageId: result.messageId,
+          cryptoCount: data.cryptoPrices.length,
+          indicatorCount: data.marketIndicators.length,
+        };
+      } catch (error) {
+        console.error("Daily metrics cron job error:", error);
         throw error;
       }
     });
